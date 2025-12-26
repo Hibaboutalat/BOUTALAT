@@ -1,23 +1,49 @@
-# RAG Q&A Chatbot 🤖📄
+# 🤖 AI Engineer Trainee - RAG Q&A Chatbot
 
-Retrieval-Augmented Generation (RAG) application that answers user questions based on provided documents (PDF / TXT / MD).
+Ce projet est une application de **RAG (Retrieval-Augmented Generation)** complète. Elle permet d'ingérer des documents (PDF, TXT, MD) et de répondre à des questions en utilisant le contexte extrait, grâce à l'API **Google Gemini** et une base de données vectorielle locale.
 
-This project was built as part of an **AI Engineer Trainee Coding Challenge**.
+## 🏗 Architecture du Système
 
----
+L'architecture est conçue pour être modulaire et scalable. Voici le flux de données :
 
-## 🚀 Features
+![Architecture du Projet](<img width="3369" height="1878" alt="image" src="https://github.com/user-attachments/assets/b4c67903-931f-463d-a141-1fe22eaa7093" />
+)
 
-- Document ingestion (PDF, TXT, MD)
-- Text chunking & embeddings generation
-- Vector database (FAISS / Chroma / Qdrant)
-- RAG-based question answering
-- FastAPI backend with `/ask` endpoint
-- Next.js frontend with chat interface
-- Source document references
-- Fully Dockerized environment
+### Flux de données :
+1. **Ingestion :** Les documents sont chargés, découpés en chunks, transformés en embeddings via **HuggingFace** (local) et stockés dans **ChromaDB**.
+2. **Récupération (Retrieval) :** Lors d'une question, le système cherche les segments les plus pertinents par similarité cosinus.
+3. **Génération :** Le contexte et la question sont envoyés au modèle **Gemini-1.5-Flash** pour générer une réponse précise avec citations des sources.
 
 ---
 
-## 🧠 Architecture
+## 🛠 Stack Technique
 
+- **Backend :** FastAPI (Python 3.10)
+- **Frontend :** Next.js 14 (App Router) + Tailwind CSS
+- **Framework RAG :** LangChain (LCEL - LangChain Expression Language)
+- **LLM :** Google Gemini-1.5-Flash
+- **Embeddings :** HuggingFace `all-MiniLM-L6-v2` (Exécution CPU locale)
+- **Vector Store :** ChromaDB (Persistante)
+- **Conteneurisation :** Docker & Docker Compose
+
+---
+
+## 📁 Structure du Projet
+
+```text
+.
+├── backend/
+│   ├── data/              # Documents à ingérer (ex: Data.pdf)
+│   ├── chroma_db/         # Base de données vectorielle persistante
+│   ├── main.py            # API REST FastAPI
+│   ├── ingestion.py       # Script de traitement des documents
+│   ├── Dockerfile         # Image Docker Backend
+│   └── requirements.txt   # Dépendances Python
+├── frontend/
+│   ├── app/               # UI Next.js
+│   ├── Dockerfile         # Image Docker Frontend
+│   └── package.json       # Dépendances Node.js
+├── architecture.png       # Schéma de l'architecture
+├── docker-compose.yml     # Orchestration des services
+├── docker.sh              # Script d'automatisation des commandes
+└── .env                   # Variables d'environnement (Clé API)
