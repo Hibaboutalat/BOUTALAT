@@ -6,8 +6,7 @@ Ce projet est une application de **RAG (Retrieval-Augmented Generation)** compl�
 
 L'architecture est conçue pour être modulaire et scalable. Voici le flux de données :
 
-![Architecture du Projet](<img width="3369" height="1878" alt="image" src="https://github.com/user-attachments/assets/b4c67903-931f-463d-a141-1fe22eaa7093" />
-)
+![Architecture du Projet](https://ibb.co/LDbnXYST)
 
 ### Flux de données :
 1. **Ingestion :** Les documents sont chargés, découpés en chunks, transformés en embeddings via **HuggingFace** (local) et stockés dans **ChromaDB**.
